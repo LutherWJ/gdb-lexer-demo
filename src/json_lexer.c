@@ -8,8 +8,7 @@
 
 int init_lexer(Lexer_t *lexer, char *text, size_t text_length) {
   ArrayList token_list;
-  int list_err = array_create(&token_list, sizeof(Token_t), TOKEN_LIST_LENGTH);
-  if (list_err < 0) {
+  if (array_create(&token_list, sizeof(Token_t), TOKEN_LIST_LENGTH)) {
     return -1;
   }
 
