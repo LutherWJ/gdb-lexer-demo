@@ -50,18 +50,17 @@ void print_token(char *json_text, Token_t *token) {
 
 int parse_json(char *json_text, JsonNode_t *out_ptr) {
   // Initialize our lexer
-  Lexer_t lexer;
-  init_lexer(&lexer, json_text, strlen(json_text));
+  Lexer_t *lexer = lexer_init(json_text, strlen(json_text));
 
   // Convert text into "tokens"
-  int token_result = tokenize_json(&lexer);
+  int token_result = tokenize_json(lexer);
   if (token_result < 0) {
     return token_result;
   }
 
   // Print output to make sure nothing is bugged (it is)
-  for (size_t i = 0; i < lexer.token_list->count; i++) {
-    Token_t *token = array_get(lexer.token_list, i);
+  for (size_t i = 0; i < lexer->token_list->count; i++) {
+    Token_t *token = array_get(lexer->token_list, i);
     print_token(json_text, token);
   }
   return 0;

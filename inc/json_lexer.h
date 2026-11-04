@@ -41,7 +41,8 @@ typedef struct {
 } Lexer_t;
 
 int tokenize_json(Lexer_t *lexer);
-int init_lexer(Lexer_t *lexer, char *text, size_t text_length);
+Lexer_t *lexer_init(char *text, size_t text_length);
+void lexer_free(Lexer_t *lexer);
 void skip_whitespace(Lexer_t *lexer);
 Token_t parse_string(Lexer_t *lexer);
 Token_t parse_number(Lexer_t *lexer);

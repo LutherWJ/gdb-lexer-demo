@@ -6,10 +6,11 @@
 #include <stdlib.h>
 #include <string.h>
 
-int init_lexer(Lexer_t *lexer, char *text, size_t text_length) {
+Lexer_t *lexer_init(char *text, size_t text_length) {
+  Lexer_t *lexer = malloc(sizeof(Lexer_t));
   ArrayList token_list;
   if (array_create(&token_list, sizeof(Token_t), TOKEN_LIST_LENGTH)) {
-    return -1;
+    return NULL;
   }
 
   lexer->token_list = &token_list;
@@ -17,8 +18,10 @@ int init_lexer(Lexer_t *lexer, char *text, size_t text_length) {
   lexer->text_length = text_length;
   lexer->pos = 0;
 
-  return 0;
+  return lexer;
 }
+
+void lexer_free(Lexer_t *lexer) { free(lexer); }
 
 Token_t parse_string(Lexer_t *lexer) {
   Token_t token;
