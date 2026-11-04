@@ -28,6 +28,7 @@ Token_t parse_string(Lexer_t *lexer) {
   lexer->pos++;
   size_t start_pos = lexer->pos; // Record start index of the string
 
+  // calculate pointer to the first character of the string
   token.value.str_slice.start = lexer->text + (sizeof(char) + start_pos);
 
   // Iterate through until we reach the closing quote
